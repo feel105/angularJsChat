@@ -8,6 +8,7 @@
       rel="stylesheet"
       href="bower_components/bootstrap/dist/css/bootstrap.css"
     />
+    <link rel="stylesheet" href="public/css/style.css" />
     <!-- <base href="/" /> -->
   </head>
   <body>
@@ -38,13 +39,16 @@
         </ul>
       </div>
     </nav>
-
+    <div class="container">
     <ng-view></ng-view>
+    </div>      
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="bower_components/ng-websocket/ng-websocket.js"></script>
+    <script src="bower_components/socket.io-client/dist/socket.io.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>   
     <script src="app.js"></script>
     <script src="page1/page1.js"></script>
     <script src="page2/page2.js"></script>

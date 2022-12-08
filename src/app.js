@@ -3,6 +3,7 @@ var app = angular.module("myApp", [
   "myApp.page1",
   "myApp.page2",
   "ngWebsocket",
+  "btford.socket-io",
 ]);
 app.config(function ($routeProvider, $locationProvider) {
   $routeProvider.otherwise({
@@ -41,6 +42,30 @@ app.factory("Socket", [
     return socket;
   },
 ]);
+
+app.factory("socketio", function ($rootScope) {
+  var socket = io.connect("http://127.0.0.1:3000");
+  return {
+    on: function (eventName, callback) {
+      socket.on(eventName, function () {
+        var args = arguments;
+        $rootScope.$apply(function () {
+          callback.apply(socket, args);
+        });
+      });
+    },
+    emit: function (eventName, data, callback) {
+      socket.emit(eventName, data, function () {
+        var args = arguments;
+        $rootScope.$apply(function () {
+          if (callback) {
+            callback.apply(socket, args);
+          }
+        });
+      });
+    },
+  };
+});
 
 app.service("myService", function () {
   return "is my service";
